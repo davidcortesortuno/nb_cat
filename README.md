@@ -2,9 +2,11 @@
 
 Print Jupyter notebooks on a terminal
 
-If we execute `python nb_cat.py`:
+If we execute the test notebook:
 
 ```
+@: python nb_cat.py test/test_nb.ipynb
+
 --------------------------------------------------------------------------------
 
 [M]:   # Test notebook
