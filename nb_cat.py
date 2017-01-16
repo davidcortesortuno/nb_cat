@@ -13,23 +13,33 @@ class tint:
 
 # -----------------------------------------------------------------------------
 
-cell_type = {'code': tint.BLUE + '[C]:' + tint.END,
+CELL_TYPE = {'code': tint.BLUE + '[C]:' + tint.END,
              'markdown': tint.GREEN + '[M]:' + tint.END}
 
-with open('FeGe_parameters.ipynb') as nb_file:
+OUT = tint.RED + '[Out]:' + tint.END
+
+with open('test_nb.ipynb') as nb_file:
     # File instance and notebook version:
     nb = nbformat.read(nb_file, 4)
 
+print('-' * 80 + '\n')
 for cell in nb['cells']:
-    print('{:<15} {}'.format(cell_type[cell['cell_type']],
-                             cell['source'].replace('\n',
-                                                    '\n' + ' ' * 7)
-                             ))
-    # for source in cell['source'].split('\n'):
-    #     print('     {}'.format(source))
+    cell_input = cell['source'].replace('\n', '\n' + ' ' * 7)
+    print('{:<15} {}\n'.format(CELL_TYPE[cell['cell_type']],
+                               cell_input))
 
     if cell['cell_type'] == 'code':
-        print('[Out]: {}'.format(cell['outputs'])
-              )
+        if cell['outputs']:
+            cout = cell['outputs'][0]
+        else:
+            print('\n' + '-' * 80 + '\n')
+            continue
 
-    print('-' * 80)
+        if cout['output_type'] == 'execute_result':
+            print('{} {}'.format(OUT, cout['data']['text/plain']))
+
+        elif cout['output_type'] == 'stream':
+            txt = cout['text'].replace('\n', '\n' + ' ' * 7)
+            print('{} {}'.format(OUT, txt))
+
+    print('\n' + '-' * 80 + '\n')
