@@ -1,11 +1,13 @@
 # nb_cat
 
-Print Jupyter notebooks on a terminal
+Print Jupyter notebooks on a terminal. We provide a `setup.py` file to
+install the package using `pip`, which adds an executable to your
+`../bin/` folder and call this script using `nb_cat FILE`.
 
 If we execute the test notebook:
 
 ```
-@: python nb_cat.py test/test_nb.ipynb
+@: nb_cat test_nb.ipynb
 
 --------------------------------------------------------------------------------
 
@@ -29,3 +31,11 @@ If we execute the test notebook:
 ...
 
 ```
+
+## TODO:
+
+* Convert LaTeX strings to unicode using:
+  https://github.com/phfaist/pylatexenc/blob/master/pylatexenc/latex2text.py
+  That repo needs to be updated to be compatible with Python 3
+
+* Check for Matplotlib Figures or Images

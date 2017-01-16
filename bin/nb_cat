@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+import argparse
+import nb_cat
+
+# -----------------------------------------------------------------------------
+
+parser = argparse.ArgumentParser(description='nb_cat')
+
+parser.add_argument('nb_file', help='IPython notebook file')
+
+# Parser arguments
+args = parser.parse_args()
+
+# -----------------------------------------------------------------------------
+
+nb = nb_cat.NbCat(args.nb_file)
+nb.print_notebook()
